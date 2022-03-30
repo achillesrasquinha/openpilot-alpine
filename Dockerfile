@@ -20,7 +20,8 @@ RUN apk add --no-cache --virtual .build-deps \
         swig \
         jq \
         cmake \
-        musl-dev && \
+        musl-dev \
+        py3-numpy && \
     git clone https://github.com/casadi/casadi.git --depth 1 --branch ${CASADI_BRANCH} ${CASADI_DIR} && \
     cd ${CASADI_DIR} && \
     mkdir build && cd build && \
