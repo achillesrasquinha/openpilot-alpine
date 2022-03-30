@@ -1,6 +1,6 @@
 
 
-FROM  python:alpine3.8
+FROM  python:3.8-alpine3.15
 
 LABEL maintainer=achillesrasquinha@gmail.com
 
@@ -17,9 +17,9 @@ RUN apk add --no-cache --virtual .build-deps \
         make \
         gcc \
         g++ \
-        cmake --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \ 
         swig \
         jq \
+        cmake \
         musl-dev && \
     git clone https://github.com/casadi/casadi.git --depth 1 --branch ${CASADI_BRANCH} ${CASADI_DIR} && \
     cd ${CASADI_DIR} && \
