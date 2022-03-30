@@ -20,14 +20,15 @@ RUN apk add --no-cache --virtual .build-deps \
         swig \
         jq \
         cmake \
-        musl-dev \
-        py3-numpy && \
+        musl-dev && \
     git clone https://github.com/casadi/casadi.git --depth 1 --branch ${CASADI_BRANCH} ${CASADI_DIR} && \
     cd ${CASADI_DIR} && \
     mkdir build && cd build && \
     cmake -DWITH_PYTHON=ON .. && \
     rm -rf ${CASADI_DIR}} && \
     # onnx
+    pip install --upgrade pip && \
+    pip install numpy && \
     git clone https://github.com/Microsoft/onnxruntime --depth 1 --branch ${ONNXRUNTIME_BRANCH} ${ONNXRUNTIME_DIR} && \
     cd /onnxruntime && \
     ./build.sh --parallel --build_wheel --enable_pybind \
@@ -39,7 +40,6 @@ RUN apk add --no-cache --virtual .build-deps \
     git clone https://github.com/commaai/openpilot.git --depth 1 $OPEN_PILOT_DIR && \
     cd ${OPEN_PILOT_DIR} && \
     git submodule update --init --depth 1 && \
-    pip install --upgrade pip && \
     pip install \
         scons && \
     jq -r '.default \
