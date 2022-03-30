@@ -17,7 +17,7 @@ RUN apk add --no-cache --virtual .build-deps \
         make \
         gcc \
         g++ \
-        cmake \ 
+        cmake --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \ 
         swig \
         jq \
         musl-dev && \
@@ -63,6 +63,5 @@ RUN pip install -r ./requirements.txt && \
     python setup.py install
 
 ENTRYPOINT ["/entrypoint.sh"]
-
 
 CMD ["openpilot-alpine"]
