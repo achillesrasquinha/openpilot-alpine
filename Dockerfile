@@ -23,6 +23,8 @@ RUN apk add --no-cache --virtual .build-deps \
         musl-dev \
         linux-headers \
         libexecinfo-dev && \
+    apk add --no-cache \
+        protobuf-dev=3.6.1-r1 --repository=http://dl-cdn.alpinelinux.org/alpine/v3.10/main && \
     git clone https://github.com/casadi/casadi.git --depth 1 --branch ${CASADI_BRANCH} ${CASADI_DIR} && \
     cd ${CASADI_DIR} && \
     mkdir build && cd build && \
@@ -52,7 +54,8 @@ RUN apk add --no-cache --virtual .build-deps \
     # pipenv --python python install --clear && \
     # scons -u -j$(nproc) && \
     apk del \
-        .build-deps && \
+        .build-deps \
+        protobuf-dev && \
     pipenv --clear && \
     pip uninstall scons pipenv && \
     mkdir -p $OPENPILOT_ALPINE_PATH
